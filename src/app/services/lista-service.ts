@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Lista } from '../models/lista.model';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListaService {
   public listas: Lista[] = []; //almacena las lisstas de actividades
-  constructor() {
+  constructor(    
+    public alertController: AlertController,
+    public toastController: ToastController,
+  ) {
     this.cargarStorage()
    }
 
@@ -46,5 +50,23 @@ export class ListaService {
     }
     this.cargarStorage()
   }
+
+  
+  validarInput(input: any): boolean{
+    if(input && input.titulo) {
+      return true
+    }
+    this.presentToast("Debe ingresar un valor")
+    return false
+  }
+
+  async presentToast(mensaje:string){
+    let toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    })
+    toast.present()
+  }
+
 
 }

@@ -59,63 +59,7 @@ export class Tab1Page {
     await alerta.present();
     console.log("Click en el botón")
   }
-  async EditarLista(lista: Lista){
-    let alerta = await this.alertController.create({
-      header: "Editar lista",
-      inputs: [
-        {
-          type: "text",
-          name: "titulo",
-          placeholder: "Ingresar nuevo nombre de la lista",
-          value: lista.titulo
-        }
-      ],
-      buttons: [
-        {
-          text: "Cancelar",
-          role: "cancel"
-        },
-        {
-          text:"Editar",
-          handler: (data: any)=> {
-            let esValido: boolean = this.validarInput(data)
-            if(esValido){
-              lista.titulo = data.titulo
-              this.listaService.editarLista(lista)
-
-              this.presentToast('Lista editada correctamente!')
-            }
-          }
-        }
-      ]
-    })
-  }
-
-
-  validarInput(input: any): boolean{
-    if(input && input.titulo) {
-      return true
-    }
-    this.presentToast("Debe ingresar un valor")
-    return false
-  }
-
-  async presentToast(mensaje:string){
-    let toast = await this.toastController.create({
-      message: mensaje,
-      duration: 2000
-    })
-    toast.present()
-  }
-
-  editarLista(listaItem: Lista) {
-    this.EditarLista(listaItem)
-  }
-
-  eliminarLista(listaItem: Lista) {
-    this.listaService.eliminarLista(listaItem)
-    console.log("Eliminar lista: ", listaItem)
-  }
+  
 
   //llave final
 }
