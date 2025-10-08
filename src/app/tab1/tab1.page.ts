@@ -45,11 +45,11 @@ export class Tab1Page {
         {
           text: "Crear",
           handler: (data:any)=> {
-           let esValido: boolean = this.validarInput(data)
+           let esValido: boolean = this.listaService.validarInput(data)
            if(esValido){
             let creadaOk = this.listaService.crearLista(data.titulo)
             if(creadaOk){
-              this.presentToast('Lista creada correctamente!')
+              this.listaService.presentToast('Lista creada correctamente!')
             }
            }
           }
